@@ -1,5 +1,138 @@
 {% extends "layout.html" %}
 
+{% extends "layout.html" %}
+
+
+
 {% block body %}
+<br>
+<h2><center><p class="font-weight-bold">Data Comparasion</p></center></h2>
+<br>
+
+<div class="alert alert-primary" role="alert">
+  <center>Enter what you are looking!</center>
+</div>
+<form>
+{% csrf_token %}
+
+<div class="row">
+  
+  <div class="col-md-8 offset-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Dataset Type</span>
+      </div>
+      <input type="text" name = "keyword_Dataset" class="form-sm" placeholder="Search">
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Species</span>
+      </div>
+      <input type="text" name = "keyword_species" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Cell/Tissue</span>
+      </div>
+      <input type="text" name = "keyword_Cell_tissue" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Cell Line/Strain</span>
+      </div>
+      <input type="text" name = "keyword_cell_line" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row">
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">G E O </span>
+      </div>
+      <input type="text" name = "keyword_Geo" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Instrument</span>
+      </div>
+      <input type="text" name = "keyword_Instrument" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">SRA Accession</span>
+      </div>
+      <input type="text" name = "keyword_SRA" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+  
+</div>
+
+<button type = "submit" class="btn btn-outline-primary btn-lg btn-block"><img src="https://img.icons8.com/material-sharp/24/000000/search.png">  Search</button>
+
+
+</form>
+
+  <br><br>
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"><center>Species</center></th>
+        <th scope="col"><center>Cell Line/Strain</center></th>
+        <th scope="col"><center>Cell/Tissue</center></th>
+        <th scope="col"><center>Dataset Type</center></th>
+        <th scope="col"><center>GEO</center></th>
+        <th scope="col"><center>SRA Accession</center></th>
+        <th scope="col"><center>Instrument</center></th>
+              
+        <th scope="col"><center>Compare</center></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for experiment in experiments %}
+
+    <tr>
+            <th><center>{{ experiment.species}}</center></th>
+            <td><center>{{experiment.cellLine_Strain}}</center></td>
+            <td><center>{{experiment.Cell_Tissue}}</center></td>
+            <td><center>{{experiment.Dataset_Type}}</center></td>
+            <td><center>{{experiment.Geo}}</center></td>
+            <td><center>{{experiment.SRA_Accession}}</center></td>
+            <td><center>{{experiment.Instrument}}</center></td>
+            
+            <td><center>
+                <div class="form-check">
+                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+              </div>
+            </center></td>
+
+        </tr>
+
+      {% endfor %}
+       
+      
+    </tbody>
+  </table>
+  <br><br><br><br><br>
 
 {% endblock body %}
+
