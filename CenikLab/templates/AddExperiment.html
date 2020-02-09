@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<br>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+<h3>Add Experiment</h3>
+<hr>
+        <form method = "post">
+
+            {% csrf_token %}  
+            
+            {{form|crispy}}
+            <br>
+            <button type = "submit" class = "btn btn-warning">Submit</button>
+            <a class = "btn btn-warning" href="/addData">Continue Adding Data</a>
+        </form>
+
+    </div>
+  </div>
+  <br><br><br><br>
+
+{% endblock body %}

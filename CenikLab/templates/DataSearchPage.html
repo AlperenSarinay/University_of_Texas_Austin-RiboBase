@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<br><br>
+  
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"><center>Species</center></th>
+        <th scope="col"><center>Cell Line/Strain</center></th>
+        <th scope="col"><center>Cell/Tissue</center></th>
+        <th scope="col"><center>Dataset Type</center></th>
+        <th scope="col"><center>GEO</center></th>
+        <th scope="col"><center>SRA Accession</center></th>
+        <th scope="col"><center>Instrument</center></th>
+           
+        
+        <th scope ="col"><center>Publication Time</center></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for experiment in experiments %}
+
+    <tr>
+            <th><center>{{ experiment.species}}</center></th>
+            <td><center>{{experiment.cellLine_Strain}}</center></td>
+            <td><center>{{experiment.Cell_Tissue}}</center></td>
+            <td><center>{{experiment.Dataset_Type}}</center></td>
+            <td><center>{{experiment.Geo}}</center></td>
+            <td><center>{{experiment.SRA_Accession}}</center></td>
+            <td><center>{{experiment.Instrument}}</center></td>
+           
+            <td><center>{{experiment.create_date}}</center></td>
+            
+
+        </tr>
+
+      {% endfor %}
+       
+      
+    </tbody>
+  </table>
+  <br><br>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <td colspan="5" >GSM234234234</tdcolspan="2">
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for metadatas in Metadata %}
+      <tr>
+        <th colspan="1">Status</th>
+        <th colspan="4">{{ metadatas.Status}}</th>
+        
+        
+      </tr>
+
+      <tr>
+        <th scope="col">Title</th>
+        <th>{{ metadatas.title}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Sample Type</th>
+        <th>{{ metadatas.SampleType}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Source Name</th>
+        <th>{{ metadatas.SourceName}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Organizm</th>
+        <th>{{ metadatas.Organizm}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Characteristics</th>
+        <th>{{ metadatas.Characteristics}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Growth Protocol</th>
+        <th>{{ metadatas.GrowthProtocol}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Extracted Molecule</th>
+        <th>{{ metadatas.ExtractedMolecule}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Extraction Protocol</th>
+        <th>{{ metadatas.ExtractionProtocol}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Library Strategy</th>
+        <th>{{ metadatas.LibraryStrategy}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Library Source</th>
+        <th>{{ metadatas.LibrarySource}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Library Selection</th>
+        <th>{{ metadatas.LibrarySelection}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th scope="col">Instrument Model</th>
+        <th>{{ metadatas.InstrumentModel}}</th>
+      </tr>
+
+      <tr>
+        <th scope="col">Library Description</th>
+        <th>{{ metadatas.Description}}</th> 
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+    
+
+  </table>
+
+
+{% endblock body %}
