@@ -126,4 +126,43 @@ def DataSearchPage(request,id):
     return render(request,"DataSearchPage.html",{"experiments":experiments,"Metadata":Metadata})
 
 def Comparasion(request):
-    return render(request,"Comparasion.html")
+
+    keyword_Species = request.GET.get("keyword_species")
+    keyword_cell_tissue = request.GET.get("keyword_Cell_tissue")
+    keyword_Cell_line = request.GET.get("keyword_cell_line")
+    keyword_dataset = request.GET.get("keyword_Dataset")
+    keyword_instrument = request.GET.get("keyword_Instrument")
+    keyword_sra = request.GET.get("keyword_SRA")
+    keyword_geo = request.GET.get("keyword_Geo")
+
+    if keyword_Species:
+        experiments = Experiment_show.objects.filter(species__contains=keyword_Species)
+        return render(request,"Comparasion.html",{"experiments":experiments})
+
+    if keyword_cell_tissue:
+        experiments = Experiment_show.objects.filter(Cell_Tissue__contains=keyword_cell_tissue)
+        return render(request,"Comparasion.html",{"experiments":experiments})
+
+    if keyword_Cell_line:
+        experiments = Experiment_show.objects.filter(cellLine_Strain__contains=keyword_Cell_line)
+        return render(request,"Comparasion.html",{"experiments":experiments})
+
+    if keyword_dataset:
+        experiments = Experiment_show.objects.filter(Dataset_Type__contains=keyword_dataset)
+        return render(request,"Comparasion.html",{"experiments":experiments})
+
+    if keyword_instrument:
+        experiments = Experiment_show.objects.filter(Instrument__contains=keyword_instrument)
+        return render(request,"Comparasion.html",{"experiments":experiments})
+
+    if keyword_sra:
+        experiments = Experiment_show.objects.filter(SRA_Accession__contains=keyword_sra)
+        return render(request,"Comparasion.html",{"experiments":experiments}) 
+        
+    if keyword_geo:
+        experiments = Experiment_show.objects.filter(Geo__contains=keyword_geo)
+        return render(request,"Comparasion.html",{"experiments":experiments})  
+    
+    experiments = Experiment_show.objects.all()
+    return render(request,"Comparasion.html",{"experiments":experiments})
+    
