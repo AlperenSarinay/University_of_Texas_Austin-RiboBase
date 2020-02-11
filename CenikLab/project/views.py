@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Experiment
+from .models import Experiment,Study
 from .forms import AddExperimentForm,AddStudyForm,AddSrrForm
 from django.contrib import messages
 
@@ -137,7 +137,8 @@ def Comparasion(request):
         return render(request,"DataSearch.html",{"experiments":experiments})
 
     if keyword_Study:
-        experiments = Experiment.objects.filter(study__contains=keyword_Study)
+        study = Study.objects.get(geo_accession=keyword_Study)
+        experiments = Experiment.objects.filter(study__geo_accession = study.geo_accession)
         return render(request,"DataSearch.html",{"experiments":experiments})
 
     if keyword_Cell_line:
