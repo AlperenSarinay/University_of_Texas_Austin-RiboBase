@@ -28,7 +28,8 @@ def DataSearch(request):
         return render(request,"DataSearch.html",{"experiments":experiments})
 
     if keyword_Study:
-        experiments = Experiment.objects.filter(study__contains=keyword_Study)
+        study = Study.objects.get(geo_accession=keyword_Study)
+        experiments = Experiment.objects.filter(study__geo_accession = study.geo_accession)
         return render(request,"DataSearch.html",{"experiments":experiments})
 
     if keyword_Cell_line:
@@ -54,7 +55,7 @@ def DataSearch(request):
     experiments = Experiment.objects.all()
     return render(request,"DataSearch.html",{"experiments":experiments})
 
-def DataDowload(request):
+def DataDownload(request):
 
     keyword_Organism = request.GET.get("keyword_organism")
     keyword_Study = request.GET.get("keyword_study")
@@ -66,35 +67,36 @@ def DataDowload(request):
 
     if keyword_Organism:
         experiments = Experiment.objects.filter(organism__contains=keyword_Organism)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"DataDownload.html",{"experiments":experiments})
 
     if keyword_Study:
-        experiments = Experiment.objects.filter(study__contains=keyword_Study)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        study = Study.objects.get(geo_accession=keyword_Study)
+        experiments = Experiment.objects.filter(study__geo_accession = study.geo_accession)
+        return render(request,"DataDownload.html",{"experiments":experiments})
 
     if keyword_Cell_line:
         experiments = Experiment.objects.filter(cell_line__contains=keyword_Cell_line)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"DataDownload.html",{"experiments":experiments})
 
     if keyword_Title:
         experiments = Experiment.objects.filter(experiment_title__contains=keyword_Title)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"DataDownload.html",{"experiments":experiments})
 
     if keyword_Accession:
         experiments = Experiment.objects.filter(experiment_accession__contains=keyword_Accession)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"DataDownload.html",{"experiments":experiments})
 
     if keyword_sra:
         experiments = Experiment.objects.filter(sample_accession__contains=keyword_sra)
-        return render(request,"DataSearch.html",{"experiments":experiments}) 
+        return render(request,"DataDownload.html",{"experiments":experiments}) 
         
     if keyword_Attribute:
         experiments = Experiment.objects.filter(experiment_attribute__contains=keyword_Attribute)
-        return render(request,"DataSearch.html",{"experiments":experiments})   
+        return render(request,"DataDownload.html",{"experiments":experiments})   
 
     
     experiments = Experiment.objects.all()
-    return render(request,"DataDowload.html",{"experiments":experiments})
+    return render(request,"DataDownload.html",{"experiments":experiments})
 
 def AddExperiment(request):
     form= AddStudyForm(request.POST or None)
@@ -111,9 +113,9 @@ def addData(request):
     if form.is_valid():
         form.save()
         messages.success(request,"The Experiment was successfully created.")
-        return redirect("AddData")
+        return redirect("addData")
         
-    return render(request,"AddData.html",{"form":form})
+    return render(request,"addData.html",{"form":form})
 
 def DataSearchPage(request,id):
     
@@ -134,32 +136,32 @@ def Comparasion(request):
 
     if keyword_Organism:
         experiments = Experiment.objects.filter(organism__contains=keyword_Organism)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"Comparasion.html",{"experiments":experiments})
 
     if keyword_Study:
         study = Study.objects.get(geo_accession=keyword_Study)
         experiments = Experiment.objects.filter(study__geo_accession = study.geo_accession)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"Comparasion.html",{"experiments":experiments})
 
     if keyword_Cell_line:
         experiments = Experiment.objects.filter(cell_line__contains=keyword_Cell_line)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"Comparasion.html",{"experiments":experiments})
 
     if keyword_Title:
         experiments = Experiment.objects.filter(experiment_title__contains=keyword_Title)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"Comparasion.html",{"experiments":experiments})
 
     if keyword_Accession:
         experiments = Experiment.objects.filter(experiment_accession__contains=keyword_Accession)
-        return render(request,"DataSearch.html",{"experiments":experiments})
+        return render(request,"Comparasion.html",{"experiments":experiments})
 
     if keyword_sra:
         experiments = Experiment.objects.filter(sample_accession__contains=keyword_sra)
-        return render(request,"DataSearch.html",{"experiments":experiments}) 
+        return render(request,"Comparasion.html",{"experiments":experiments}) 
         
     if keyword_Attribute:
         experiments = Experiment.objects.filter(experiment_attribute__contains=keyword_Attribute)
-        return render(request,"DataSearch.html",{"experiments":experiments})   
+        return render(request,"Comparasion.html",{"experiments":experiments})   
 
 
     experiments = Experiment.objects.all()
@@ -176,5 +178,17 @@ def UpdateExperiment(request,id):
         return redirect("UpdateExperiment")
 
     return render(request,"Update.html",{"form":form})
+
+def AddSRR(request):
+
+    form = AddSrrForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request,"The SRR  was successfully created.")
+        return redirect("AddSRR")
+        
+    return render(request,"AddSRR.html",{"form":form})
+
+
 
 

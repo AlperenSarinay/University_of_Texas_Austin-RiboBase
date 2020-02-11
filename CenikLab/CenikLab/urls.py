@@ -25,8 +25,10 @@ urlpatterns = [
     path('AddExperiment/',views.AddExperiment,name="AddExperiment"),
     path('addData/',views.addData,name="addData"),
     path('DataSearch/',views.DataSearch,name="DataSearch"),
-    path('DataDowload/',views.DataDowload,name="DataDowload"),
+    path('DataDownload/',views.DataDownload,name="DataDownload"),
     path('DataSearchPage/<int:id>',views.DataSearchPage,name="DataSearchPage"),
     path('UpdateExperiment/<int:id>',views.UpdateExperiment,name="UpdateExperiment"),
     path('Comparasion/',views.Comparasion,name="Comparasion"),
+    path('AddSRR/',views.AddSRR,name="AddSRR"),
+    
 ]
