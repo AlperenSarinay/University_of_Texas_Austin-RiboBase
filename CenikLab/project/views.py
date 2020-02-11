@@ -189,6 +189,12 @@ def AddSRR(request):
         
     return render(request,"AddSRR.html",{"form":form})
 
+def StudySearch(request):
+    return render(request,"StudySearch.html")
+
+def StudySearchPage(request):
+    return render(request,"StudySearchPage.html")
+
 
 
 
