@@ -6,31 +6,33 @@
   <table class="table table-bordered table-hover">
     <thead class="thead-dark">
       <tr>
-        <th scope="col"><center>Species</center></th>
-        <th scope="col"><center>Cell Line/Strain</center></th>
-        <th scope="col"><center>Cell/Tissue</center></th>
-        <th scope="col"><center>Dataset Type</center></th>
-        <th scope="col"><center>GEO</center></th>
+        <th scope="col"><center>organism</center></th>
+        <th scope="col"><center>Experiment Title</center></th>
+        <th scope="col"><center>Accession</center></th>
+        <th scope="col"><center>Study</center></th>
+        <th scope="col"><center>Cell Line</center></th>
         <th scope="col"><center>SRA Accession</center></th>
-        <th scope="col"><center>Instrument</center></th>
+        <th scope="col"><center>Attribute</center></th>
+        <th scope="col"><center>Update</center></th>
+              
            
         
-        <th scope ="col"><center>Publication Time</center></th>
       </tr>
     </thead>
     <tbody>
     {% for experiment in experiments %}
 
     <tr>
-            <th><center>{{ experiment.species}}</center></th>
-            <td><center>{{experiment.cellLine_Strain}}</center></td>
-            <td><center>{{experiment.Cell_Tissue}}</center></td>
-            <td><center>{{experiment.Dataset_Type}}</center></td>
-            <td><center>{{experiment.Geo}}</center></td>
-            <td><center>{{experiment.SRA_Accession}}</center></td>
-            <td><center>{{experiment.Instrument}}</center></td>
+      <td><center>{{experiment.organism}}</center></td>
+      <td><center>{{experiment.experiment_title}}</center></td>
+      <td><center>{{experiment.experiment_accession}}</center></td>
+      <th><center>{{ experiment.study}}</center></th>
+      <td><center>{{experiment.cell_line}}</center></td>
+      <td><center>{{experiment.sample_accession}}</center></td>
+      <td><center>{{experiment.experiment_attribute}}</center></td>
+      <td><center><a href="/UpdateExperiment/{{experiment.id}}" class ="btn btn-warning">Update</center></td>
+      
            
-            <td><center>{{experiment.create_date}}</center></td>
             
 
         </tr>
@@ -42,122 +44,105 @@
   </table>
   <br><br>
 
+
   <table class="table table-bordered table-hover">
     <thead class="thead-dark">
+      {% for experiment in experiments %}
       <tr>
-        <td colspan="5" >GSM234234234</tdcolspan="2">
+        <td colspan="5" >Sample : {{ experiment.experiment_alias}}</tdcolspan="2">
       </tr>
     </thead>
     
+    
+    
+    
+    
     <tbody>
-        {% for metadatas in Metadata %}
       <tr>
-        <th colspan="1">Status</th>
-        <th colspan="4">{{ metadatas.Status}}</th>
-        
-        
+            <th colspan="1">Study Name</th>
+            <th colspan="5">{{ experiment.study_name}}</th>
+      </tr>
+      
+
+      <tr>
+        <th scope="col">Design Description</th>
+        <th>{{ experiment.design_description }}</th>
+ 
       </tr>
 
       <tr>
-        <th scope="col">Title</th>
-        <th>{{ metadatas.title}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">Sample Attribute</th>
+        <th>{{ experiment.sample_attribute}}</th>
+
       </tr>
 
       <tr>
-        <th scope="col">Sample Type</th>
-        <th>{{ metadatas.SampleType}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">library Strategy</th>
+        <th>{{ experiment.library_strategy}}</th>
+
+      </tr>
+      
+      
+      
+     
+      <tr>
+        <th scope="col">Organism</th>
+        <th>{{ experiment.organism}}</th>
+
       </tr>
 
       <tr>
-        <th scope="col">Source Name</th>
-        <th>{{ metadatas.SourceName}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">Library Layout</th>
+        <th>{{ experiment.library_layout}}</th>
+
       </tr>
 
       <tr>
-        <th scope="col">Organizm</th>
-        <th>{{ metadatas.Organizm}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">Library Construction Protocol</th>
+        <th>{{ experiment.library_construction_protocol}}</th>
+
       </tr>
 
       <tr>
-        <th scope="col">Characteristics</th>
-        <th>{{ metadatas.Characteristics}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">Platform</th>
+        <th>{{ experiment.platform}}</th>
+   
       </tr>
 
       <tr>
-        <th scope="col">Growth Protocol</th>
-        <th>{{ metadatas.GrowthProtocol}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">Platform Parameters</th>
+        <th>{{ experiment.platform_parameters}}</th>
+     
+      </tr>
+      
+     
+      
+
+
+      <tr>
+        <th scope="col">Xref Link</th>
+        <th>{{ experiment.xref_link}}</th>
+  
       </tr>
 
       <tr>
-        <th scope="col">Extracted Molecule</th>
-        <th>{{ metadatas.ExtractedMolecule}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">Submission Accession</th>
+        <th>{{ experiment.submission_accession}}</th>
+
+      </tr>
+     
+      <tr>
+        <th scope="col">SRA DB updated</th>
+        <th>{{ experiment.sradb_updated}}</th>
+      
       </tr>
 
       <tr>
-        <th scope="col">Extraction Protocol</th>
-        <th>{{ metadatas.ExtractionProtocol}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">Publication Time</th>
+        <th>{{experiment.create_date}}</th>
       </tr>
 
-      <tr>
-        <th scope="col">Library Strategy</th>
-        <th>{{ metadatas.LibraryStrategy}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
-      <tr>
-        <th scope="col">Library Source</th>
-        <th>{{ metadatas.LibrarySource}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
-      <tr>
-        <th scope="col">Library Selection</th>
-        <th>{{ metadatas.LibrarySelection}}</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
-      <tr>
-        <th scope="col">Instrument Model</th>
-        <th>{{ metadatas.InstrumentModel}}</th>
-      </tr>
-
-      <tr>
-        <th scope="col">Library Description</th>
-        <th>{{ metadatas.Description}}</th> 
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
+      
       {% endfor %}
     </tbody>
 

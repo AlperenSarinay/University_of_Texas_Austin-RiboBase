@@ -29,7 +29,7 @@
         <div class="list-group">
             <center><p class="list-group-item list-group-item-primary">Species List A-Z</p></center>
             {% for experiment in experiments %}
-            <a href="#" class="list-group-item list-group-item-action">{{ experiment.species}}</a>
+            <a href="#" class="list-group-item list-group-item-action">{{ experiment.organism}}</a>
             {% endfor %}
         </div>
     </div>
@@ -89,15 +89,7 @@
 
     
 
-    <div class="col-md-2">
-        <div class="list-group">
-            <center><p class="list-group-item list-group-item-primary">Geo List</p></center>
-            {% for study in studies %}
-            <a href="#" class="list-group-item list-group-item-action">{{ study.geo_accession}}</a>
-            {% endfor %}
-        </div>
-
-    </div>
+    
 
    
 </div>

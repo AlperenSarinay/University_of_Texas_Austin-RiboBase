@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 
+
 {% block body %}
 <br>
 <h2><center><p class="font-weight-bold">Data Comparasion</p></center></h2>
@@ -17,9 +18,9 @@
   <div class="col-md-8 offset-md-4">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">Dataset Type</span>
+        <span class="input-group-text" id="inputGroup-sizing-default">Study</span>
       </div>
-      <input type="text" name = "keyword_Dataset" class="form-sm" placeholder="Search">
+      <input type="text" name = "keyword_study" class="form-sm" placeholder="Search">
     </div>
 
   </div>
@@ -29,24 +30,24 @@
   <div class="col-6 col-md-4">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">Species</span>
+        <span class="input-group-text" id="inputGroup-sizing-default">organism</span>
       </div>
-      <input type="text" name = "keyword_species" class="form-sm" placeholder="Search">
+      <input type="text" name = "keyword_organism" class="form-sm" placeholder="Search">
     </div>
   </div>
   <div class="col-6 col-md-4">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">Cell/Tissue</span>
+        <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
       </div>
-      <input type="text" name = "keyword_Cell_tissue" class="form-sm" placeholder="Search">
+      <input type="text" name = "keyword_experiment_title" class="form-sm" placeholder="Search">
     </div>
   </div>
 
   <div class="col-6 col-md-4">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">Cell Line/Strain</span>
+        <span class="input-group-text" id="inputGroup-sizing-default">Cell Line</span>
       </div>
       <input type="text" name = "keyword_cell_line" class="form-sm" placeholder="Search">
     </div>
@@ -59,26 +60,26 @@
   <div class="col-6 col-md-4">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">G E O </span>
+        <span class="input-group-text" id="inputGroup-sizing-default">Accession</span>
       </div>
-      <input type="text" name = "keyword_Geo" class="form-sm" placeholder="Search">
+      <input type="text" name = "keyword_experiment_accession" class="form-sm" placeholder="Search">
     </div>
   </div>
   <div class="col-6 col-md-4">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">Instrument</span>
+        <span class="input-group-text" id="inputGroup-sizing-default">SRA</span>
       </div>
-      <input type="text" name = "keyword_Instrument" class="form-sm" placeholder="Search">
+      <input type="text" name = "keyword_sample_accession" class="form-sm" placeholder="Search">
     </div>
   </div>
 
   <div class="col-6 col-md-4">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">SRA Accession</span>
+        <span class="input-group-text" id="inputGroup-sizing-default">Attribute</span>
       </div>
-      <input type="text" name = "keyword_SRA" class="form-sm" placeholder="Search">
+      <input type="text" name = "keyword_experiment_attribute" class="form-sm" placeholder="Search">
     </div>
   </div>
   
@@ -93,13 +94,13 @@
   <table class="table table-bordered table-hover">
     <thead class="thead-dark">
       <tr>
-        <th scope="col"><center>Species</center></th>
-        <th scope="col"><center>Cell Line/Strain</center></th>
-        <th scope="col"><center>Cell/Tissue</center></th>
-        <th scope="col"><center>Dataset Type</center></th>
-        <th scope="col"><center>GEO</center></th>
+        <th scope="col"><center>organism</center></th>
+        <th scope="col"><center>Experiment Title</center></th>
+        <th scope="col"><center>Accession</center></th>
+        <th scope="col"><center>Study</center></th>
+        <th scope="col"><center>Cell Line</center></th>
         <th scope="col"><center>SRA Accession</center></th>
-        <th scope="col"><center>Instrument</center></th>
+        <th scope="col"><center>Attribute</center></th>
               
         <th scope="col"><center>Compare</center></th>
       </tr>
@@ -108,13 +109,14 @@
     {% for experiment in experiments %}
 
     <tr>
-            <th><center>{{ experiment.species}}</center></th>
-            <td><center>{{experiment.cellLine_Strain}}</center></td>
-            <td><center>{{experiment.Cell_Tissue}}</center></td>
-            <td><center>{{experiment.Dataset_Type}}</center></td>
-            <td><center>{{experiment.Geo}}</center></td>
-            <td><center>{{experiment.SRA_Accession}}</center></td>
-            <td><center>{{experiment.Instrument}}</center></td>
+      <td><center>{{experiment.organism}}</center></td>
+      
+      <td><center>{{experiment.experiment_title}}</center></td>
+      <td><center>{{experiment.experiment_accession}}</center></td>
+      <th><center>{{ experiment.study}}</center></th>
+      <td><center>{{experiment.cell_line}}</center></td>
+      <td><center>{{experiment.sample_accession}}</center></td>
+      <td><center>{{experiment.experiment_attribute}}</center></td>
             
             <td><center>
                 <div class="form-check">

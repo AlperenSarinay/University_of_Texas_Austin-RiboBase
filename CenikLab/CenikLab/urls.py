@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from RiboBase import views
+from project import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +27,6 @@ urlpatterns = [
     path('DataSearch/',views.DataSearch,name="DataSearch"),
     path('DataDowload/',views.DataDowload,name="DataDowload"),
     path('DataSearchPage/<int:id>',views.DataSearchPage,name="DataSearchPage"),
+    path('UpdateExperiment/<int:id>',views.UpdateExperiment,name="UpdateExperiment"),
     path('Comparasion/',views.Comparasion,name="Comparasion"),
 ]
