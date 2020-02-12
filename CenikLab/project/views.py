@@ -8,6 +8,7 @@ from django.contrib import messages
 def index(request):
     
     experiments = Experiment.objects.all()
+    
     return render(request,"index.html",{"experiments":experiments})
 
 def about(request):
