@@ -2,4 +2,152 @@
 
 {% block body %}
 
+<br><br>
+  
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"><center>Accession</center></th>
+        <th scope="col"><center>Title</center></th>
+        <th scope="col"><center>Type</center></th>
+        <th scope="col"><center>Abstract</center></th>
+        <th scope="col"><center>Description</center></th>
+        <th scope="col"><center>GEO</center></th>
+        <th scope="col"><center>SRA DB updated</center></th>
+        <th scope="col"><center>Publication Time</center></th>      
+        
+      </tr>
+    </thead>
+    <tbody>
+    {% for study in studies %}
+
+        <tr>
+            <td><center>{{study.study_accession}}</center></td>      
+            <td><center>{{study.study_title}}</center></td>
+            <td><center>{{study.study_type}}</center></td>
+            <th><center>{{study.study_abstract}}</center></th>
+            <td><center>{{study.study_description}}</center></td>
+            <td><center>{{study.geo_accession}}</center></td>
+            <td><center>{{study.sradb_updated}}</center></td>
+            <td><center>{{study.create_date}}</center></td>
+        </tr>
+
+      {% endfor %}
+        
+    </tbody>
+  </table>
+  <br><br>
+
+  <table class="table table-bordered table-hover ">
+    <thead class="thead-active">
+      {% for experiment in experiments %}
+      <tr class="table-dark">
+        <td colspan="5" >Sample : {{ experiment.experiment_alias}}</tdcolspan="2">
+      </tr>
+    </thead>
+    
+    <tbody>
+        <tr>
+            <th colspan="1">GEO</th>
+            <th colspan="5">{{ experiment.study}}</th>
+      </tr>
+      <tr>
+            <th colspan="1">Study Name</th>
+            <th colspan="5">{{ experiment.study_name}}</th>
+      </tr>
+      <tr>
+        <th scope="col">Design Description</th>
+        <th>{{ experiment.design_description }}</th>
+ 
+      </tr>
+      <tr>
+        <th scope="col">Experiment Accession</th>
+        <th>{{ experiment.experiment_accession}}</th>
+
+      </tr>
+      <tr>
+        <th scope="col">Sample Attribute</th>
+        <th>{{ experiment.sample_attribute}}</th>
+
+      </tr>
+      <tr>
+        <th scope="col">Experiment Title</th>
+        <th>{{ experiment.experiment_title}}</th>
+
+      </tr>
+      <tr>
+        <th scope="col">Experiment Attribute</th>
+        <th>{{ experiment.experiment_attribute}}</th>
+
+      </tr>
+      <tr>
+        <th scope="col">library Strategy</th>
+        <th>{{ experiment.library_strategy}}</th>
+
+      </tr>
+      <tr>
+        <th scope="col">Organism</th>
+        <th>{{ experiment.organism}}</th>
+
+      </tr>
+
+      <tr>
+        <th scope="col">Library Layout</th>
+        <th>{{ experiment.library_layout}}</th>
+
+      </tr>
+
+      <tr>
+        <th scope="col">Library Construction Protocol</th>
+        <th>{{ experiment.library_construction_protocol}}</th>
+
+      </tr>
+
+      <tr>
+        <th scope="col">Platform</th>
+        <th>{{ experiment.platform}}</th>
+   
+      </tr>
+
+      <tr>
+        <th scope="col">Platform Parameters</th>
+        <th>{{ experiment.platform_parameters}}</th>
+     
+      </tr>
+      
+      <tr>
+        <th scope="col">Sample Accession</th>
+        <th>{{ experiment.sample_accession}}</th>
+     
+      </tr>
+      <tr>
+        <th scope="col">Xref Link</th>
+        <th>{{ experiment.xref_link}}</th>
+  
+      </tr>
+      <tr>
+        <th scope="col">Cell Line</th>
+        <th>{{ experiment.cell_line}}</th> 
+      </tr>
+      <tr>
+        <th scope="col">Submission Accession</th>
+        <th>{{ experiment.submission_accession}}</th>
+      </tr>    
+      <tr>
+        <th scope="col">SRA DB updated</th>
+        <th>{{ experiment.sradb_updated}}</th>
+      </tr>
+      <tr>
+        <th scope="col">Publication Time</th>
+        <th>{{experiment.create_date}}</th>
+      </tr>     
+      {% endfor %}
+    </tbody>
+
+    
+
+  </table>
+
+
 {% endblock body %}

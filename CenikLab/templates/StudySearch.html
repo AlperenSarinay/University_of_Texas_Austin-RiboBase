@@ -1,5 +1,138 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<br>
+<h2><center><p class="font-weight-bold">Study Search</p></center></h2>
+<br>
+
+
+<div class="alert alert-primary" role="alert">
+  <center>Enter what you are looking!</center>
+</div>
+<form>
+{% csrf_token %}
+        
+
+<div class="row">
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+      </div>
+      <input type="text" name = "keyword_title" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Type</span>
+      </div>
+      <input type="text" name = "keyword_type" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+  
+        
+
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Abstract</span>
+      </div>
+      <input type="text" name = "keyword_abstract" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row">
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+      </div>
+      <input type="text" name = "keyword_Description" class="form-sm" placeholder="Search">
+    </div>
+   
+  </div>
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">GEO</span>
+      </div>
+      <input type="text" name = "keyword_geo" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Accession</span>
+      </div>
+      <input type="text" name = "keyword_accession" class="form-sm" placeholder="Search">
+    </div>
+  </div>
+  
+</div>
+
+
+
+
+
+
+
+<button type = "submit" class="btn btn-outline-primary btn-lg btn-block"><img src="https://img.icons8.com/material-sharp/24/000000/search.png">  Search</button>
+
+
+</form>
+
+<br><br>
+    
+  
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"><center>Accession</center></th>
+        <th scope="col"><center>Title</center></th>
+        <th scope="col"><center>Type</center></th>
+        <th scope="col"><center>Abstract</center></th>
+        <th scope="col"><center>Description</center></th>
+        <th scope="col"><center>GEO</center></th>
+        <th scope="col"><center>SRA DB updated</center></th>
+        <th scope="col"><center>Publication Time</center></th>
+        
+        <th scope="col"><center>Detail</center></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if studies %}
+    {% for study in studies %}
+
+    <tr>
+            <td><center>{{study.study_accession}}</center></td>      
+            <td><center>{{study.study_title}}</center></td>
+            <td><center>{{study.study_type}}</center></td>
+            <th><center>{{study.study_abstract}}</center></th>
+            <td><center>{{study.study_description}}</center></td>
+            <td><center>{{study.geo_accession}}</center></td>
+            <td><center>{{study.sradb_updated}}</center></td>
+            <td><center>{{study.create_date}}</center></td>
+            <td><center><a href="/StudySearchPage/{{study.id}}" class ="btn btn-warning">Show</a></center></td>
+
+        </tr>
+
+      {% endfor %}
+
+      {% else %}
+
+      <div class="alert alert-danger"><center>No matching records found</center></div>
+      <br><br><br>
+
+      {% endif %}
+
+       
+      
+    </tbody>
+  </table>
 
 {% endblock body %}
