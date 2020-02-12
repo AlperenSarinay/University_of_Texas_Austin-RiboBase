@@ -7,7 +7,7 @@ class AddExperimentForm(forms.ModelForm):
         model = Experiment
         fields = ["study","experiment_alias","experiment_accession","experiment_title","study_name","design_description","sample_accession","sample_attribute",
                   "library_strategy","library_layout","library_construction_protocol","platform","platform_parameters","xref_link",
-                  "experiment_attribute","submission_accession","sradb_updated","organism","cell_line"]
+                  "experiment_attribute","submission_accession","sradb_updated","organism","cell_line","experiment_file"]
 
 
 class AddStudyForm(forms.ModelForm):

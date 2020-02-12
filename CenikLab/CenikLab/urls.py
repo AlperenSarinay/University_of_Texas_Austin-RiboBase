@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from project import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +33,8 @@ urlpatterns = [
     path('Comparasion/',views.Comparasion,name="Comparasion"),
     path('AddSRR/',views.AddSRR,name="AddSRR"),
     path('StudySearch/',views.StudySearch,name="StudySearch"),
-    path('StudySearchPage/',views.StudySearchPage,name="StudySearchPage"),
+    path('StudySearchPage/<int:id>',views.StudySearchPage,name="StudySearchPage"),
     
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

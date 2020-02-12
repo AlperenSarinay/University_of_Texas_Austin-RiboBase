@@ -21,17 +21,17 @@ class Study(models.Model):
 
 class Experiment(models.Model):
 
-    study = models.ForeignKey('Study',blank = False,on_delete = models.CASCADE)
+    study = models.ForeignKey('Study',blank = False,on_delete = models.CASCADE,related_name="experiment")
     experiment_alias = models.CharField(max_length = 200,unique = True,blank = False)
     experiment_accession = models.CharField(max_length = 200,unique = True,blank = False)
     experiment_title = models.CharField(max_length = 200,blank = False)
     study_name = models.CharField(max_length = 200,blank = False)
-    design_description = models.TextField(max_length = 200,blank = False)
-    sample_accession = models.CharField(max_length = 200,blank = False)
-    sample_attribute = models.TextField(max_length = 200,blank = False)
-    library_strategy = models.CharField(max_length = 200,blank = False)
-    library_layout = models.CharField(max_length = 200,blank = False)
-    library_construction_protocol = models.TextField(max_length = 200,blank = False)
+    design_description = models.TextField(max_length = 200,blank = True)
+    sample_accession = models.CharField(max_length = 200,blank = True)
+    sample_attribute = models.TextField(max_length = 200,blank = True)
+    library_strategy = models.CharField(max_length = 200,blank = True)
+    library_layout = models.CharField(max_length = 200,blank = True)
+    library_construction_protocol = models.TextField(max_length = 200,blank = True)
     platform = models.CharField(max_length = 200,blank = False)
     platform_parameters = models.CharField(max_length = 200,blank = False)
     xref_link = models.CharField(max_length = 200,blank = False)
@@ -39,14 +39,15 @@ class Experiment(models.Model):
     submission_accession = models.CharField(max_length = 200,blank = False)
     sradb_updated = models.CharField(max_length = 200,blank = False)
     organism = models.CharField(max_length = 200,blank = False)
-    cell_line = models.CharField(max_length = 200,blank = False)    
+    cell_line = models.CharField(max_length = 200,blank = False) 
+    experiment_file = models.FileField(blank = True,null = True)   
     create_date = models.DateTimeField(auto_now_add = True) 
 
     def __str__(self):
         return self.experiment_alias
 
 class Srr(models.Model):
-    experiment = models.ForeignKey('Experiment',blank=False,on_delete = models.CASCADE)
+    experiment = models.ForeignKey('Experiment',blank=False,on_delete = models.CASCADE,related_name="srr")
     create_date = models.DateTimeField(auto_now_add = True)
     sra_accession = models.CharField(max_length = 50,blank = False)
     def __str__(self):

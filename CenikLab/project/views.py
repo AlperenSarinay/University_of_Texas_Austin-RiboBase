@@ -109,7 +109,7 @@ def AddExperiment(request):
 
 def addData(request):
 
-    form = AddExperimentForm(request.POST or None)
+    form = AddExperimentForm(request.POST or None,request.FILES or None)
     if form.is_valid():
         form.save()
         messages.success(request,"The Experiment was successfully created.")
@@ -190,11 +190,51 @@ def AddSRR(request):
     return render(request,"AddSRR.html",{"form":form})
 
 def StudySearch(request):
-    return render(request,"StudySearch.html")
 
-def StudySearchPage(request):
-    return render(request,"StudySearchPage.html")
+    keyword_Accession = request.GET.get("keyword_accession")
+    keyword_Title = request.GET.get("keyword_title")
+    keyword_Type = request.GET.get("keyword_type")
+    keyword_Abstract= request.GET.get("keyword_abstract")
+    keyword_Description = request.GET.get("keyword_Description")
+    keyword_Geo = request.GET.get("keyword_geo")
+    
+    if keyword_Accession:
+        studies = Study.objects.filter(study_accession__contains=keyword_Accession)
+        return render(request,"StudySearch.html",{"studies":studies})
 
+    if keyword_Title:
+        studies = Study.objects.filter(study_title__contains=keyword_Title)
+        return render(request,"StudySearch.html",{"studies":studies})
+
+    if keyword_Type:
+        studies = Study.objects.filter(study_type__contains=keyword_Type)
+        return render(request,"StudySearch.html",{"studies":studies})
+
+    if keyword_Abstract:
+        studies = Study.objects.filter(study_abstract__contains=keyword_Abstract)
+        return render(request,"StudySearch.html",{"studies":studies})
+
+    if keyword_Description:
+        studies = Study.objects.filter(study_description__contains=keyword_Description)
+        return render(request,"StudySearch.html",{"studies":studies})
+
+    if keyword_Geo:
+        studies = Study.objects.filter(geo_accession__contains=keyword_Geo)
+        return render(request,"StudySearch.html",{"studies":studies}) 
+  
+
+    studies = Study.objects.all()
+    return render(request,"StudySearch.html",{"studies":studies})
+
+def StudySearchPage(request,id):
+    studies1 = Study.objects.filter(id=id).first()
+    studies = Study.objects.filter(id=id).all()
+    experiments = studies1.experiment.all()
+    
+    return render(request,"StudySearchPage.html",{"studies":studies,"experiments":experiments})
+
+
+  
 
 
 
