@@ -176,7 +176,7 @@ def UpdateExperiment(request,id):
         experiments = form.save(commit=False)
         experiments.save()
         messages.success(request,"The Experiment was successfully update.")
-        return redirect("UpdateExperiment")
+        return redirect("DataSearchPage")
 
     return render(request,"Update.html",{"form":form})
 
