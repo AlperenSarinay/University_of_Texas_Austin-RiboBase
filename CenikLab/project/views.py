@@ -7,8 +7,12 @@ from django.contrib import messages
 
 def index(request):
     
+    keyword_organism = request.GET.get("keyword_species")
+    if keyword_organism:
+        experiments = Experiment.objects.filter(organism__contains=keyword_organism)
+        return render(request,"DataSearch.html",{"experiments":experiments})
+
     experiments = Experiment.objects.all()
-    
     return render(request,"index.html",{"experiments":experiments})
 
 def about(request):
