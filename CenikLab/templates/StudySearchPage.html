@@ -2,12 +2,13 @@
 
 {% block body %}
 
-<br><br>
-  
+<br>
+  <h3><center>Study Detail</center></h3>
+  <br>
 
   <table class="table table-bordered table-hover">
-    <thead class="thead-dark">
-      <tr>
+    <thead>
+      <tr class="bg-info">
         <th scope="col"><center>Accession</center></th>
         <th scope="col"><center>Title</center></th>
         <th scope="col"><center>Type</center></th>
@@ -38,115 +39,54 @@
     </tbody>
   </table>
   <br><br>
-
-  <table class="table table-bordered table-hover ">
-    <thead class="thead-active">
-      {% for experiment in experiments %}
-      <tr class="table-dark">
-        <td colspan="5" >Sample : {{ experiment.experiment_alias}}</tdcolspan="2">
+  <h4><center>Experiments in study</center></h4>
+  <br>
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"><center>organism</center></th>
+        <th scope="col"><center>Experiment Title</center></th>
+        <th scope="col"><center>Accession</center></th>
+        <th scope="col"><center>Study</center></th>
+        <th scope="col"><center>Cell Line</center></th>
+        <th scope="col"><center>SRA Accession</center></th>
+        <th scope="col"><center>Attribute</center></th>
+        
+        <th scope="col"><center>Detail</center></th>
       </tr>
     </thead>
-    
     <tbody>
-        <tr>
-            <th colspan="1">GEO</th>
-            <th colspan="5">{{ experiment.study}}</th>
-      </tr>
-      <tr>
-            <th colspan="1">Study Name</th>
-            <th colspan="5">{{ experiment.study_name}}</th>
-      </tr>
-      <tr>
-        <th scope="col">Design Description</th>
-        <th>{{ experiment.design_description }}</th>
- 
-      </tr>
-      <tr>
-        <th scope="col">Experiment Accession</th>
-        <th>{{ experiment.experiment_accession}}</th>
 
-      </tr>
-      <tr>
-        <th scope="col">Sample Attribute</th>
-        <th>{{ experiment.sample_attribute}}</th>
+    {% if experiments %}
+    {% for experiment in experiments %}
 
-      </tr>
-      <tr>
-        <th scope="col">Experiment Title</th>
-        <th>{{ experiment.experiment_title}}</th>
-
-      </tr>
-      <tr>
-        <th scope="col">Experiment Attribute</th>
-        <th>{{ experiment.experiment_attribute}}</th>
-
-      </tr>
-      <tr>
-        <th scope="col">library Strategy</th>
-        <th>{{ experiment.library_strategy}}</th>
-
-      </tr>
-      <tr>
-        <th scope="col">Organism</th>
-        <th>{{ experiment.organism}}</th>
-
-      </tr>
-
-      <tr>
-        <th scope="col">Library Layout</th>
-        <th>{{ experiment.library_layout}}</th>
-
-      </tr>
-
-      <tr>
-        <th scope="col">Library Construction Protocol</th>
-        <th>{{ experiment.library_construction_protocol}}</th>
-
-      </tr>
-
-      <tr>
-        <th scope="col">Platform</th>
-        <th>{{ experiment.platform}}</th>
-   
-      </tr>
-
-      <tr>
-        <th scope="col">Platform Parameters</th>
-        <th>{{ experiment.platform_parameters}}</th>
-     
-      </tr>
+    <tr>
       
-      <tr>
-        <th scope="col">Sample Accession</th>
-        <th>{{ experiment.sample_accession}}</th>
-     
-      </tr>
-      <tr>
-        <th scope="col">Xref Link</th>
-        <th>{{ experiment.xref_link}}</th>
-  
-      </tr>
-      <tr>
-        <th scope="col">Cell Line</th>
-        <th>{{ experiment.cell_line}}</th> 
-      </tr>
-      <tr>
-        <th scope="col">Submission Accession</th>
-        <th>{{ experiment.submission_accession}}</th>
-      </tr>    
-      <tr>
-        <th scope="col">SRA DB updated</th>
-        <th>{{ experiment.sradb_updated}}</th>
-      </tr>
-      <tr>
-        <th scope="col">Publication Time</th>
-        <th>{{experiment.create_date}}</th>
-      </tr>     
+            <td><center>{{experiment.organism}}</center></td>      
+            <td><center>{{experiment.experiment_title}}</center></td>
+            <td><center>{{experiment.experiment_accession}}</center></td>
+            <th><center>{{experiment.study}}</center></th>
+            <td><center>{{experiment.cell_line}}</center></td>
+            <td><center>{{experiment.sample_accession}}</center></td>
+            <td><center>{{experiment.experiment_attribute}}</center></td>
+            <td><center><a href="/DataSearchPage/{{experiment.id}}" class ="btn btn-warning">Show</a></center></td>
+            
+            
+            
+
+        </tr>
+
       {% endfor %}
+      {% else %}
+
+      <div class="alert alert-danger"><center>No matching records found</center></div>
+      <br><br><br>
+
+      {% endif %}
+
+       
+      
     </tbody>
-
-    
-
   </table>
 
 
