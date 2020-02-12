@@ -12,7 +12,7 @@ def index(request):
         experiments = Experiment.objects.filter(organism__contains=keyword_organism)
         return render(request,"DataSearch.html",{"experiments":experiments})
 
-    experiments = Experiment.objects.all()
+    experiments = Experiment.objects.order_by("organism")
     return render(request,"index.html",{"experiments":experiments})
 
 def about(request):
