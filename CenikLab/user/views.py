@@ -23,8 +23,6 @@ def register(request):
         
 
         return redirect("index")
-        
-        
     context =  { 
         "form" : form
     }
