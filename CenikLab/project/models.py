@@ -51,7 +51,7 @@ class Experiment(models.Model):
 
 #Creating an SRR table automatically in the database
 class Srr(models.Model):
-    experiment = models.ForeignKey('Experiment',blank=False,on_delete = models.CASCADE,related_name="srr")
+    experiment = models.ForeignKey('Experiment',blank=False,on_delete = models.CASCADE,related_name="srr") #foreing key -> experiment table
     create_date = models.DateTimeField(auto_now_add = True)
     sra_accession = models.CharField(max_length = 50,blank = False)
     def __str__(self):

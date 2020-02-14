@@ -5,6 +5,7 @@ from django.contrib import messages
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+##All pages backed work is done on this views page.##
 # Create your views here.
 
 def index(request):
@@ -14,14 +15,14 @@ def index(request):
         experiments = Experiment.objects.filter(organism__contains=keyword_organism)
         return render(request,"DataSearch.html",{"experiments":experiments})
 
-    experiments = Experiment.objects.order_by("organism")
+    experiments = Experiment.objects.order_by("organism")   #automatically takes all experiments
     return render(request,"index.html",{"experiments":experiments})
 
 def about(request):
     return render(request,"about.html")
 
 def DataSearch(request):
-            # Search algorithms
+            # Separate search template for each search title
     keyword_Organism = request.GET.get("keyword_organism")
     keyword_Study = request.GET.get("keyword_study")
     keyword_Cell_line = request.GET.get("keyword_cell_line")
@@ -73,7 +74,7 @@ def DataSearch(request):
     return render(request,"DataSearch.html",{"experiments":experiments})
 
 def DataDownload(request):
-    # Search algorithms
+    # Separate search template for each search title
     keyword_Organism = request.GET.get("keyword_organism")
     keyword_Study = request.GET.get("keyword_study")
     keyword_Cell_line = request.GET.get("keyword_cell_line")
@@ -146,13 +147,13 @@ def addData(request):
 
 def DataSearchPage(request,id):
     #Detailed page of experiment data
-    experiments = Experiment.objects.filter(id=id).all()
+    experiments = Experiment.objects.filter(id=id).all() #automatically takes all experiments
     
     
     return render(request,"DataSearchPage.html",{"experiments":experiments})
 
 def Comparasion(request):
-#search algorithm
+#Separate search template for each search title
     keyword_Organism = request.GET.get("keyword_organism")
     keyword_Study = request.GET.get("keyword_study")
     keyword_Cell_line = request.GET.get("keyword_cell_line")
@@ -206,7 +207,7 @@ def Comparasion(request):
 def UpdateExperiment(request,id):
 
         #page where the data of the experiments are updated
-    experiments = get_object_or_404(Experiment,id=id)
+    experiments = get_object_or_404(Experiment,id=id)    #automatically takes all experiments
     form = AddExperimentForm(request.POST or None,instance = experiments)
     if form.is_valid():
         experiments = form.save(commit=False)
@@ -227,7 +228,7 @@ def AddSRR(request):
     return render(request,"AddSRR.html",{"form":form})
 
 def StudySearch(request):
-# page searched for studies
+# Separate search template for each search title
     keyword_Accession = request.GET.get("keyword_accession")
     keyword_Title = request.GET.get("keyword_title")
     keyword_Type = request.GET.get("keyword_type")
@@ -276,7 +277,7 @@ def StudySearchPage(request,id):
     #page searched for studies and experiments
     studies1 = Study.objects.filter(id=id).first()
     studies = Study.objects.filter(id=id).all()
-    experiments = studies1.experiment.all()
+    experiments = studies1.experiment.all()  #Using the foreign key, we pull the experiment experiment from the id of the study table
     
     return render(request,"StudySearchPage.html",{"studies":studies,"experiments":experiments})
 
@@ -284,7 +285,7 @@ def StudySearchPage(request,id):
 def Update(request,id):
 #page where the data of the study are updated
     studies = Study.objects.filter(id=id).first()
-    experiments = studies.experiment.first()
+    experiments = studies.experiment.first()   #Using the foreign key, we pull the experiment experiment from the id of the study table
     
     form = UpdateForm(request.POST or None,instance = experiments)
     if form.is_valid():

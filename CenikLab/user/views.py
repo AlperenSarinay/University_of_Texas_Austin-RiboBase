@@ -4,6 +4,8 @@ from .forms import RegisterForm,LoginForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate
+
+##Login Page and Register Page backed work is done on this views page.##
 # Create your views here.
 
 #database registration of the newly created record
@@ -11,7 +13,7 @@ def register(request):
 
     form = RegisterForm(request.POST or None)
     if form.is_valid():
-        username = form.cleaned_data.get("username")
+        username = form.cleaned_data.get("username") #Checking if the form is empty
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
 
@@ -19,7 +21,7 @@ def register(request):
         newUser = User(email = email)
         newUser.set_password(password)
 
-        newUser.save()
+        newUser.save()  #created newUser
         login(request,newUser)
         
 
@@ -35,12 +37,12 @@ def loginUser(request):
     context = {
         "form":form
     }
-    if form.is_valid():
+    if form.is_valid():  #Checking if the form is empty
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
 
         user = authenticate(email = email,password = password)
-        if user is   None:
+        if user is   None:  # If user is empty it won't do anything
             messages.info(request,"Error !!!!!")
             return render(request,"login.html",context) 
 
