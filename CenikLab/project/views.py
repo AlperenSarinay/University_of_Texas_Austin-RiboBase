@@ -8,7 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def index(request):
-    
+    #home page, search algorithm and part with navbarin
     keyword_organism = request.GET.get("keyword_species")
     if keyword_organism:
         experiments = Experiment.objects.filter(organism__contains=keyword_organism)
@@ -59,7 +59,7 @@ def DataSearch(request):
         experiments = Experiment.objects.filter(experiment_attribute__contains=keyword_Attribute)
         return render(request,"DataSearch.html",{"experiments":experiments})   
 
-            # pagination
+            # pagination algorithm
     experiments_list = Experiment.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(experiments_list,50)
@@ -110,7 +110,7 @@ def DataDownload(request):
     if keyword_Attribute:
         experiments = Experiment.objects.filter(experiment_attribute__contains=keyword_Attribute)
         return render(request,"DataDownload.html",{"experiments":experiments})   
-
+# pagination algorithm
     experiments_list = Experiment.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(experiments_list,50)
@@ -145,14 +145,14 @@ def addData(request):
     return render(request,"addData.html",{"form":form})
 
 def DataSearchPage(request,id):
-    
+    #Detailed page of experiment data
     experiments = Experiment.objects.filter(id=id).all()
     
     
     return render(request,"DataSearchPage.html",{"experiments":experiments})
 
 def Comparasion(request):
-
+#search algorithm
     keyword_Organism = request.GET.get("keyword_organism")
     keyword_Study = request.GET.get("keyword_study")
     keyword_Cell_line = request.GET.get("keyword_cell_line")
@@ -190,7 +190,7 @@ def Comparasion(request):
         experiments = Experiment.objects.filter(experiment_attribute__contains=keyword_Attribute)
         return render(request,"Comparasion.html",{"experiments":experiments})   
 
-
+# pagination algoritm
     experiments_list = Experiment.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(experiments_list,50)
@@ -217,7 +217,7 @@ def UpdateExperiment(request,id):
     return render(request,"Update.html",{"form":form})
 
 def AddSRR(request):
-
+        # Added SRR page
     form = AddSrrForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -227,7 +227,7 @@ def AddSRR(request):
     return render(request,"AddSRR.html",{"form":form})
 
 def StudySearch(request):
-
+# page searched for studies
     keyword_Accession = request.GET.get("keyword_accession")
     keyword_Title = request.GET.get("keyword_title")
     keyword_Type = request.GET.get("keyword_type")
@@ -258,7 +258,7 @@ def StudySearch(request):
     if keyword_Geo:
         studies = Study.objects.filter(geo_accession__contains=keyword_Geo)
         return render(request,"StudySearch.html",{"studies":studies}) 
-  
+  #pagitation algorithm
     studies_list = Study.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(studies_list,50)
@@ -273,6 +273,7 @@ def StudySearch(request):
     return render(request,"StudySearch.html",{"studies":studies})
 
 def StudySearchPage(request,id):
+    #page searched for studies and experiments
     studies1 = Study.objects.filter(id=id).first()
     studies = Study.objects.filter(id=id).all()
     experiments = studies1.experiment.all()
@@ -281,7 +282,7 @@ def StudySearchPage(request,id):
 
 
 def Update(request,id):
-
+#page where the data of the study are updated
     studies = Study.objects.filter(id=id).first()
     experiments = studies.experiment.first()
     
