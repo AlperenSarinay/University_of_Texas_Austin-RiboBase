@@ -21,7 +21,7 @@ def about(request):
     return render(request,"about.html")
 
 def DataSearch(request):
-
+            # Search algorithms
     keyword_Organism = request.GET.get("keyword_organism")
     keyword_Study = request.GET.get("keyword_study")
     keyword_Cell_line = request.GET.get("keyword_cell_line")
@@ -59,6 +59,7 @@ def DataSearch(request):
         experiments = Experiment.objects.filter(experiment_attribute__contains=keyword_Attribute)
         return render(request,"DataSearch.html",{"experiments":experiments})   
 
+            # pagination
     experiments_list = Experiment.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(experiments_list,50)
@@ -72,7 +73,7 @@ def DataSearch(request):
     return render(request,"DataSearch.html",{"experiments":experiments})
 
 def DataDownload(request):
-
+    # Search algorithms
     keyword_Organism = request.GET.get("keyword_organism")
     keyword_Study = request.GET.get("keyword_study")
     keyword_Cell_line = request.GET.get("keyword_cell_line")
@@ -124,6 +125,7 @@ def DataDownload(request):
     return render(request,"DataDownload.html",{"experiments":experiments})
 
 def AddExperiment(request):
+    #After creating the same database model as an automatic form, the part where the information is filled in
     form= AddStudyForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -133,7 +135,7 @@ def AddExperiment(request):
     
 
 def addData(request):
-
+#After creating the same database model as an automatic form, the part where the information is filled in
     form = AddExperimentForm(request.POST or None,request.FILES or None)
     if form.is_valid():
         form.save()
@@ -203,6 +205,7 @@ def Comparasion(request):
 
 def UpdateExperiment(request,id):
 
+        #page where the data of the experiments are updated
     experiments = get_object_or_404(Experiment,id=id)
     form = AddExperimentForm(request.POST or None,instance = experiments)
     if form.is_valid():
