@@ -115,9 +115,12 @@
       <td><center>{{experiment.cell_line}}</center></td>
       <td><center>{{experiment.sample_accession}}</center></td>
       <td><center>{{experiment.experiment_attribute}}</center></td>
-            
-      <td><center><a class ="btn btn-warning" href="/media/{{experiment.experiment_file}}" download=><img src="https://img.icons8.com/ios/24/000000/download.png"></center></td>
 
+      {% if experiment.experiment_file %}   
+        <td><center><a class ="btn btn-warning" href="/media/{{experiment.experiment_file}}" download=><img src="https://img.icons8.com/ios/24/000000/download.png"></center></td>
+      {% else %}
+        <td><center> - </center></td>
+      {% endif %}
         </tr>
 
       {% endfor %}
