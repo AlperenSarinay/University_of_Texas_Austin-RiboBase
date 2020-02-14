@@ -135,4 +135,29 @@
     </tbody>
   </table>
 
+  <br>
+  {% if studies.has_other_pages %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        {% if studies.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ studies.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in studies.paginator.page_range %}
+          {% if studies.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></liclass="page-item">
+          {% endif %}
+        {% endfor %}
+        {% if studies.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ studies.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+
 {% endblock body %}

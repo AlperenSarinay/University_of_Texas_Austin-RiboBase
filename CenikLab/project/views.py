@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Experiment,Study
-from .forms import AddExperimentForm,AddStudyForm,AddSrrForm
+from .forms import AddExperimentForm,AddStudyForm,AddSrrForm,UpdateForm
 from django.contrib import messages
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -57,7 +59,16 @@ def DataSearch(request):
         experiments = Experiment.objects.filter(experiment_attribute__contains=keyword_Attribute)
         return render(request,"DataSearch.html",{"experiments":experiments})   
 
-    experiments = Experiment.objects.all()
+    experiments_list = Experiment.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(experiments_list,50)
+    
+    try:
+        experiments = paginator.page(page)
+    except PageNotAnInteger:
+        experiments = paginator.page(1)
+    except EmptyPage:
+        experiments = paginator.page(paginator.num_pages)
     return render(request,"DataSearch.html",{"experiments":experiments})
 
 def DataDownload(request):
@@ -99,8 +110,17 @@ def DataDownload(request):
         experiments = Experiment.objects.filter(experiment_attribute__contains=keyword_Attribute)
         return render(request,"DataDownload.html",{"experiments":experiments})   
 
+    experiments_list = Experiment.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(experiments_list,50)
     
-    experiments = Experiment.objects.all()
+    try:
+        experiments = paginator.page(page)
+    except PageNotAnInteger:
+        experiments = paginator.page(1)
+    except EmptyPage:
+        experiments = paginator.page(paginator.num_pages)
+    
     return render(request,"DataDownload.html",{"experiments":experiments})
 
 def AddExperiment(request):
@@ -169,7 +189,16 @@ def Comparasion(request):
         return render(request,"Comparasion.html",{"experiments":experiments})   
 
 
-    experiments = Experiment.objects.all()
+    experiments_list = Experiment.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(experiments_list,50)
+    
+    try:
+        experiments = paginator.page(page)
+    except PageNotAnInteger:
+        experiments = paginator.page(1)
+    except EmptyPage:
+        experiments = paginator.page(paginator.num_pages)
     return render(request,"Comparasion.html",{"experiments":experiments})
 
 def UpdateExperiment(request,id):
@@ -227,8 +256,17 @@ def StudySearch(request):
         studies = Study.objects.filter(geo_accession__contains=keyword_Geo)
         return render(request,"StudySearch.html",{"studies":studies}) 
   
-
-    studies = Study.objects.all()
+    studies_list = Study.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(studies_list,50)
+    
+    try:
+        studies = paginator.page(page)
+    except PageNotAnInteger:
+        studies = paginator.page(1)
+    except EmptyPage:
+        studies = paginator.page(paginator.num_pages)
+    
     return render(request,"StudySearch.html",{"studies":studies})
 
 def StudySearchPage(request,id):
@@ -237,6 +275,22 @@ def StudySearchPage(request,id):
     experiments = studies1.experiment.all()
     
     return render(request,"StudySearchPage.html",{"studies":studies,"experiments":experiments})
+
+
+def Update(request,id):
+
+    studies = Study.objects.filter(id=id).first()
+    experiments = studies.experiment.first()
+    
+    form = UpdateForm(request.POST or None,instance = experiments)
+    if form.is_valid():
+        experiments = form.save(commit=False)
+        experiments.save()
+        messages.success(request,"The Experiment was successfully update.")
+        return redirect("Update")
+
+    return render(request,"UpdateExperiment.html",{"form":form})
+    
 
 
   

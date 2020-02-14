@@ -34,6 +34,7 @@ urlpatterns = [
     path('AddSRR/',views.AddSRR,name="AddSRR"),
     path('StudySearch/',views.StudySearch,name="StudySearch"),
     path('StudySearchPage/<int:id>',views.StudySearchPage,name="StudySearchPage"),
+    path('Update/<int:id>',views.Update,name="Update"),
     
 ]
 

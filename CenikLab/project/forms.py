@@ -9,6 +9,11 @@ class AddExperimentForm(forms.ModelForm):
                   "library_strategy","library_layout","library_construction_protocol","platform","platform_parameters","xref_link",
                   "experiment_attribute","submission_accession","sradb_updated","organism","cell_line","experiment_file"]
 
+class UpdateForm(forms.ModelForm):
+    class Meta:
+        model = Experiment
+        fields = ["organism","cell_line"]    
+
 
 class AddStudyForm(forms.ModelForm):
     class Meta:
