@@ -1,10 +1,11 @@
 from django import forms
 
-
+#form structures required for users' information
 class LoginForm(forms.Form):
     email = forms.CharField(label = "E-mail")
     password = forms.CharField(label = "Password", widget = forms.PasswordInput)
 
+#form structures required for users' information
 class RegisterForm(forms.Form):
 
     username = forms.CharField(max_length = 50, label="Username")
