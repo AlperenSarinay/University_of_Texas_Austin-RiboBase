@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate
 # Create your views here.
 
+#database registration of the newly created record
 def register(request):
 
     form = RegisterForm(request.POST or None)
@@ -28,6 +29,7 @@ def register(request):
     }
     return render(request,"register.html",context)
 
+#code that allows the registered user to enter the system
 def loginUser(request):
     form = LoginForm(request.POST or None)
     context = {

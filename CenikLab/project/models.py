@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 
+#Creating an Study table automatically in the database
 class Study(models.Model):
 
     geo_accession = models.CharField( max_length = 50,unique = True,blank = False)
@@ -18,10 +19,11 @@ class Study(models.Model):
     def __str__(self):
         return self.geo_accession
 
+#Creating an experiment table automatically in the database
 
 class Experiment(models.Model):
 
-    study = models.ForeignKey('Study',blank = False,on_delete = models.CASCADE,related_name="experiment")
+    study = models.ForeignKey('Study',blank = False,on_delete = models.CASCADE,related_name="experiment") #foreing key -> Study table
     experiment_alias = models.CharField(max_length = 200,unique = True,blank = False)
     experiment_accession = models.CharField(max_length = 200,unique = True,blank = False)
     experiment_title = models.CharField(max_length = 200,blank = False)
@@ -46,6 +48,8 @@ class Experiment(models.Model):
     def __str__(self):
         return self.experiment_alias
 
+
+#Creating an SRR table automatically in the database
 class Srr(models.Model):
     experiment = models.ForeignKey('Experiment',blank=False,on_delete = models.CASCADE,related_name="srr")
     create_date = models.DateTimeField(auto_now_add = True)
