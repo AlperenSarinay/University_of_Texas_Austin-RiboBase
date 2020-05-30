@@ -31,6 +31,10 @@ django manage.py runserver
 
 ## Sample Screensot
 
+![ScreenShot1](https://user-images.githubusercontent.com/39926184/83325754-77075a80-a277-11ea-92c5-115c40c9c3c5.jpg)
+
+![ScreenShot2](https://user-images.githubusercontent.com/39926184/83325786-c9e11200-a277-11ea-85b6-adac4b8565a4.jpg)
+
 
 
 
