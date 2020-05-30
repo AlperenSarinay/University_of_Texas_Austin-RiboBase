@@ -16,13 +16,13 @@ git clone https://github.com/AlperenSarinay/University_of_Texas_Austin-RiboBase
 
 3. let's open the terminal and do the downloads
 ```sh
-pip3 install psycopg2
+pip install psycopg2
 ```
 ```sh
-pip3 install django-crispy-forms
+pip install django-crispy-forms
 ```
 ```sh
-pip3 install django-cleanup
+pip install django-cleanup
 ```
 4.We can run the project, likewise apply the following code to the terminal
 ```sh
